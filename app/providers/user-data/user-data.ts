@@ -27,13 +27,13 @@ export class UserData {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
-      console.log('loading products');
+      console.log('loading users');
       // this.http.get('data/product.json')
 
 
       self.http
         .get('http://libtutservice.azurewebsites.net/api/user')
-        .timeout(2000)
+        .timeout(30000)
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data

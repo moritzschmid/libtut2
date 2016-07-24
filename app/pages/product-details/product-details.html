@@ -17,32 +17,34 @@
     <div class="author" *ngIf="selectedItem.autor">
       <ion-icon name="person"></ion-icon>
       {{selectedItem.autor}}
-
     </div>
     <div class="publisher" *ngIf="selectedItem.verlag">
       <ion-icon name="cube"></ion-icon>
-
       {{selectedItem.verlag}}
-
     </div>
-    <p *ngIf="selectedItem.isbn != 0">ISBN: {{selectedItem.isbn}}</p>
-    <hr>
-    <p *ngIf="selectedItem.beschreibung" class="description"> {{selectedItem.beschreibung}} </p>
-    <p *ngIf="selectedItem.class1">Kassen: {{selectedItem.class1}}</p>
-    <p *ngIf="selectedItem.productID">Id: {{selectedItem.productID}} </p>
-    <p *ngIf="selectedItem.fach">Fach: {{selectedItem.fach}}</p>
-    <p *ngIf="selectedItem.teilbereich">Sub: {{selectedItem.teilbereich}} </p>
-    <p *ngIf="selectedItem.exemplars">
-      Exemplare:
-      <label ion-item *ngFor="let ex of selectedItem.exemplars">
+    <ion-list>
+      <ion-item *ngIf="selectedItem.isbn != 0">ISBN: {{selectedItem.isbn}}</ion-item>
+      <ion-item *ngIf="selectedItem.beschreibung" class="description"> {{selectedItem.beschreibung}} </ion-item>
+      <ion-item>Kassen: {{selectedItem.class1 ? '1 ' : ''}} {{selectedItem.class2 ? '2 ' : ''}} {{selectedItem.class3 ? '3 ' : ''}}
+        {{selectedItem.class4 ? '4 ' : ''}} {{selectedItem.class5 ? '5 ' : ''}} {{selectedItem.class6 ? '6 ' : ''}} {{selectedItem.class7
+        ? '7 ' : ''}} {{selectedItem.class8 ? '8 ' : ''}} {{selectedItem.class9 ? '9' : ''}}
+
+      </ion-item>
+      <ion-item *ngIf="selectedItem.productID">Id: {{selectedItem.productID}} </ion-item>
+      <ion-item *ngIf="selectedItem.fach">Fach: {{selectedItem.fach}}</ion-item>
+      <ion-item *ngIf="selectedItem.teilbereich">Sub: {{selectedItem.teilbereich}} </ion-item>
+      <div *ngIf="selectedItem.Exemplars"><br>
+        Exemplare:
+        <ion-item  *ngFor="let ex of selectedItem.Exemplars">
         {{ex.exemplarId}} 
         <span *ngIf="ex.lend" class="red" (click)="userTapped($event, ex.lend.user)">{{ex.lend.user.firstname + " "+ ex.lend.user.name}}</span>
         <span *ngIf="!ex.lend" class="green" >verfügbar</span>
      
-      </label>
-    </p>
-    <p *ngIf="isoffline">
-      Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell
-    </p>
+        </ion-item>
+      </div>
+      <p *ngIf="isoffline">
+        Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell
+      </p>
+    </ion-list>
   </div>
 </ion-content>

@@ -25,9 +25,9 @@ export class UserDetailData {
       //      this.http.get('data/'+id+'.json')
       // 'http://192.168.178.20:9000/api/product/'+id
 
-      self.http.get('http://libtutservice.azurewebsites.net/api/product/' + id)
+      self.http.get('http://libtutservice.azurewebsites.net/api/user/' + id)
         //  this.http.get('data/'+id+'.json')
-        .timeout(1000)
+        .timeout(5000)
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data

@@ -1,12 +1,12 @@
-import {Component} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
-import {ProductDetailData} from "../../providers/product-detail-data/product-detail-data";
-import {ProductDetailDataLocal} from "../../providers/product-detail-data/product-detail-data-local";
-import {Product}  from "../../providers/product-data/product";
-import {UserDetailsPage} from "../user-details/user-details";
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {ProductDetailData} from '../../providers/product-detail-data/product-detail-data';
+import {ProductDetailDataLocal} from '../../providers/product-detail-data/product-detail-data-local';
+import {Product}  from '../../providers/product-data/product';
+import {UserDetailsPage} from '../user-details/user-details';
 
 @Component({
-  templateUrl: "build/pages/product-details/product-details.html",
+  templateUrl: 'build/pages/product-details/product-details.html',
   providers: [ProductDetailData, ProductDetailDataLocal]
 
 })
@@ -25,7 +25,7 @@ export class ProductDetailsPage {
     self.isoffline = true;
 
     // If we navigated to this page, we will have an item available as a nav param
-    this.navItem = navParams.get("item");
+    this.navItem = navParams.get('item');
 
     this.loadLocalDB(this.navItem.productID as number);
   }
@@ -37,10 +37,10 @@ export class ProductDetailsPage {
 
     self.detailDataLocal.load(id)
       .catch(err => {
-        if (err.name === "not_found") {
+        if (err.name === 'not_found') {
           // init something to show
           // do not set _id to prevent 
-          console.log("using navigation Item");
+          console.log('using navigation Item');
           self.selectedItem = self.navItem;
           self.selectedItem._id = null;
           self.selectedItem._rev = null;
@@ -58,7 +58,7 @@ export class ProductDetailsPage {
         self.detailDataRemote.load(id)
           .then(data => {
             self.isoffline = false;
-            console.log("item loaded from remote storage");
+            console.log('item loaded from remote storage');
             console.log(data);
 
             self.selectedItem = data[0];
@@ -68,8 +68,8 @@ export class ProductDetailsPage {
           })
           .catch(err => {
             // we're offline
-            if (err.name !== "timeout") {
-              console.log("timeout");
+            if (err.name !== 'timeout') {
+              console.log('timeout');
               self.isoffline = true;
             } else
               throw err;

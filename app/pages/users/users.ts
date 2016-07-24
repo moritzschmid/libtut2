@@ -130,8 +130,8 @@ export class UsersPage {
       .load()
       .then(data => {
         let p = data as Array<any>;
-        self.users = p.sort((n1, n2) => n1.titel > n2.titel ? 1 : n1.titel < n2.titel ? -1 : 0);
-      })
+        self.users = p.sort((n1, n2) => n1.name.localeCompare( n2.name));
+      }) 
       ;
   }
 

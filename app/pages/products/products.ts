@@ -1,17 +1,17 @@
-import {Component} from "@angular/core";
-import {Loading, NavController, NavParams} from "ionic-angular";
-import {ProductDetailsPage} from "../product-details/product-details";
-import {HelloIonicPage} from "../hello-ionic/hello-ionic";
-import {AddProductPage} from "../addproduct/addproduct";
-import {ProductData} from "../../providers/product-data/product-data";
-import {ProductDataLocal} from "../../providers/product-data/product-data-local";
-import {Product} from "../../providers/product-data/product";
-import {Keyboard} from "ionic-native";
-import {Dialogs} from "ionic-native";
+import {Component} from '@angular/core';
+import {Loading, NavController, NavParams} from 'ionic-angular';
+import {ProductDetailsPage} from '../product-details/product-details';
+import {HelloIonicPage} from '../hello-ionic/hello-ionic';
+import {AddProductPage} from '../addproduct/addproduct';
+import {ProductData} from '../../providers/product-data/product-data';
+import {ProductDataLocal} from '../../providers/product-data/product-data-local';
+import {Product} from '../../providers/product-data/product';
+import {Keyboard} from 'ionic-native';
+import {Dialogs} from 'ionic-native';
 
 
 @Component({
-  templateUrl: "build/pages/products/products.html",
+  templateUrl: 'build/pages/products/products.html',
   providers: [ProductData, ProductDataLocal]
 })
 
@@ -25,14 +25,14 @@ export class ProductsPage {
 
   constructor(private nav: NavController, navParams: NavParams, public libdataRemote: ProductData, public libdatalocal: ProductDataLocal) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get("item");
+    this.selectedItem = navParams.get('item');
     this.products = new Array<Product>();
     this.isloading = true;
     this.hasError = false;
 
     this.loadLocalDB();
     Keyboard.hideKeyboardAccessoryBar(true);
-    console.log("constructor done ");
+    console.log('constructor done ');
   }
 
 
@@ -42,7 +42,7 @@ export class ProductsPage {
       .then(data => { self.products = data; })
       .then(function () {
         self.isloading = false;
-        console.log("loading done");
+        console.log('loading done');
       }
       )
       .catch(function (err) {
@@ -63,29 +63,29 @@ export class ProductsPage {
   }
  onClickOffline() {
 
-    console.log("onClickOffline()");
+    console.log('onClickOffline()');
 
-    Dialogs.alert("Es besteht keine verbindung zur Bibliothek", "Offline", "ok");
+    Dialogs.alert('Es besteht keine verbindung zur Bibliothek', 'Offline', 'ok');
   }
 
   doRefresh(refresher) {
 
     let loading = Loading.create({
-      content: "Please wait...",
+      content: 'Please wait...',
     });
 
     this.nav.present(loading);
 
     let self = this;
-    self.searchfilter = "";
+    self.searchfilter = '';
     self.isloading = true;
     this.hasError = false;
-    console.log("reload()");
+    console.log('reload()');
     self.loadRemoteDB()
       .then(function () {
         self.libdatalocal.store(self.products)
           .then(function () {
-            console.log("storelocal done");
+            console.log('storelocal done');
             self.isloading = false;
             loading.dismiss();
 
@@ -107,13 +107,12 @@ export class ProductsPage {
       .load()
       .then(data => {
         let p = data as Array<Product>;
-        self.products = p.sort((n1, n2) => n1.titel > n2.titel ? 1 : n1.titel < n2.titel ? -1 : 0);
-      })
-      ;
+        self.products = p.sort((n1, n2) => n1.titel.localeCompare(n2.titel as string));
+      });
   }
 
   onInput(search) {
-    console.log("onInput");
+    console.log('onInput');
 
     let self = this;
     self.loadLocalDB()
@@ -129,16 +128,16 @@ export class ProductsPage {
   }
 
   onCancel(event) {
-    console.log("onCancel");
+    console.log('onCancel');
     // seems to be softkeyboardbutton
 
-    if (event.x + event.y === 0 && event.type === "click")
+    if (event.x + event.y === 0 && event.type === 'click')
       return;
     Keyboard.close();
   }
 
   closeKb() {
-    console.log("closeKb()");
+    console.log('closeKb()');
     Keyboard.close();
     return false;
   }

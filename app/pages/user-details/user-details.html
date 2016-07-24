@@ -33,12 +33,12 @@
       <ion-icon name="alert" class="red"></ion-icon>
       Admin
     </div>
-    <p *ngIf="selectedItem.lends.length > 0">
-      Exemplare:
-      <label ion-item *ngFor="let lend of selectedItem.lends">
-        {{lend.exemplarId}}         {{lend.lenddate | date: "dd.MM.yyyy"  }} 
-
-      </label>
+    <p *ngIf="selectedItem.Lends.length > 0">
+      Ausgeliehen:
+      <button ion-item *ngFor="let lend of selectedItem.Lends" (click)="productTabbed($event, lend.product)">
+        <p>{{lend.product ? lend.product.titel: "---"}}</p>         
+        <p>Id: {{lend.exemplarId}} Seit: {{lend.lenddate | date: "dd.MM.yyyy"  }} </p>
+      </button>
     </p>
     <p *ngIf="isoffline">
       Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell

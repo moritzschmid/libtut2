@@ -41,8 +41,7 @@ export class ProductDetailDataLocal {
         .catch(err => {
           console.log('error on updating item: ' + err);
         });
-    }
-    else {
+    } else {
       // add : use productID as pouchDb ID
       detail._id = detail.productID.toString();
       this.pouchDbDetails.put(detail)
