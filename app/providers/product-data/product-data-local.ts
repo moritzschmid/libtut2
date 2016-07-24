@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import "rxjs/add/operator/map";
-import {Product} from "../../providers/product-data/product";
+import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
+import {Product} from '../../providers/product-data/product';
 
 
-let PouchDB = require("pouchdb");
-let DBNAME = "products";
+let PouchDB = require('pouchdb');
+let DBNAME = 'products';
 /*
   Generated class for the LibData provider.
 
@@ -18,7 +18,7 @@ export class ProductDataLocal {
 
   constructor() {
     this.data = null;
-    this.pouchDb = new PouchDB("libtutDB", { adapter: "websql" });
+    this.pouchDb = new PouchDB('libtutDB', { adapter: 'websql' });
     this.pouchDb.info().then(console.log.bind(console));
   }
   store(products: Array<Product>) {
@@ -33,7 +33,7 @@ export class ProductDataLocal {
         return dbProducts;
       })
       .catch(err => {
-        if (err.name === "not_found") {
+        if (err.name === 'not_found') {
           let np: any = {};
           np._id = DBNAME;
           np.products = products;
@@ -45,7 +45,7 @@ export class ProductDataLocal {
         self.pouchDb.put(data);
       }
       )
-      .then(console.log("saved to local db")
+      .then(console.log('saved to local db')
       );
   }
 

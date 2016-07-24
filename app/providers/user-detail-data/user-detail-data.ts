@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the DetailData provider.
@@ -25,7 +25,7 @@ export class UserDetailData {
       //      this.http.get('data/'+id+'.json')
       // 'http://192.168.178.20:9000/api/product/'+id
 
-      self.http.get("http://192.168.178.20:9000/api/product/" + id)
+      self.http.get('http://libtutservice.azurewebsites.net/api/product/' + id)
         //  this.http.get('data/'+id+'.json')
         .timeout(1000)
         .map(res => res.json())

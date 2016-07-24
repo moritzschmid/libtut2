@@ -32,7 +32,7 @@ export class UserData {
 
 
       self.http
-        .get('http://192.168.178.20:9000/api/user')
+        .get('http://libtutservice.azurewebsites.net/api/user')
         .timeout(2000)
         .map(res => res.json())
         .subscribe(data => {
