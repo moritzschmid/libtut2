@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar brand-bg>
+    <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+    <ion-title>User Liste </ion-title>
+    <ion-buttons end>
+      {{users.length}}
+      <button>
+      <ion-icon name="refresh" *ngIf="isloading"> </ion-icon>
+    </button>
+      <button (click)="onClickOffline()">
+      <ion-icon name="flash" *ngIf="hasError"> </ion-icon>
+    </button>
+      <button (click)="startScan()">  
+      <ion-icon name="qr-scanner"></ion-icon>
+     </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <form>
+    <ion-searchbar [(ngModel)]="searchfilter" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+  </form>
+</ion-header>
+
+<ion-content class="user">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingtext="Pull to Refresh" refreshingtext="Refreshing ..." refreshingicon="refresher-pulling-icon">
+      < </ion-refresher-content>
+  </ion-refresher>
+  <!--<button (click)="reload()">reload</button>-->
+  <ion-list [virtualScroll]="users">
+    <button ion-item *virtualItem="let item" (click)="itemTapped($event, item)">
+      <ion-icon name="person" item-left [ngClass]="{red: item.isadmin == 'True'}"></ion-icon>
+      {{item.name}}      {{item.firstname}}
+
+      <div class="item-note" item-right>
+        {{item.lends.length}}
+      </div>
+    </button>
+  </ion-list>
+</ion-content>
+<button fab brand-bg fab-bottom fab-right (click)="addTapped()" style="bottom:100px">
+    <ion-icon name="add" ></ion-icon>
+  </button>
+<button fab brand-bg fab-bottom fab-right (click)="startScan()">
+    <ion-icon name="qr-scanner" ></ion-icon>
+  </button>

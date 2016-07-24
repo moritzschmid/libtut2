@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar brand-bg>
+        <button menuToggle>
+    <ion-icon name="menu" brand></ion-icon>
+  </button>
+        <ion-title brand>Admin</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <p ion-item *ngFor="let listDBInfo of DbInfos">
+        docs: {{listDBInfo.doc_count}} <br> update seq: {{listDBInfo.update_seq}}<br> sqlite: {{listDBInfo.sqlite_plugin}}<br>        encoding: {{listDBInfo.websql_encodeing}}<br> db name: {{listDBInfo.db_name}}<br> compaction: {{listDBInfo.auto_compaction}}<br>        adapter: {{listDBInfo.adapter}}<br>
+        <button (click)="deleteListDB(listDBInfo.db_name)">DeleteDB</button>
+    </p>
+    <p>
+        {{appname}} <br> {{appversion}} <br> {{appversionnumber}} <br> {{ appversioncode}} <br>
+    </p>
+</ion-content>

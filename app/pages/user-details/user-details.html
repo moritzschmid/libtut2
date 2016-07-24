@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar brand-bg>
+    <button menuToggle *ngIf="!selectedItem">
+    <ion-icon name="menu"></ion-icon>
+    <ion-icon name="book"></ion-icon>
+  </button>
+    <ion-title *ngIf="selectedItem">
+      <ion-icon name="person"></ion-icon>
+      {{selectedItem.firstname}} {{selectedItem.name}}
+    </ion-title>
+    <ion-buttons end>
+      <ion-icon name="flash" *ngIf="isoffline"> </ion-icon>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class='itemDetails'>
+  <div *ngIf="selectedItem" class="selection">
+    <!--<div class="author" *ngIf="selectedItem.firstname">
+      <ion-icon name="person"></ion-icon>
+      {{selectedItem.firstname}} {{selectedItem.name}}
+    </div>-->
+    <div class="desc" *ngIf="selectedItem.userId">
+      {{selectedItem.userId}}
+    </div>
+    <hr>
+    <div class="author" *ngIf="selectedItem.email">
+      <ion-icon name="mail"></ion-icon>
+      <a href="mailto:{{selectedItem.email}}">{{selectedItem.email}}</a>
+    </div>
+    <div class="author" *ngIf="selectedItem.isadmin == 'True'">
+      <ion-icon name="alert" class="red"></ion-icon>
+      Admin
+    </div>
+    <p *ngIf="selectedItem.lends.length > 0">
+      Exemplare:
+      <label ion-item *ngFor="let lend of selectedItem.lends">
+        {{lend.exemplarId}}         {{lend.lenddate | date: "dd.MM.yyyy"  }} 
+
+      </label>
+    </p>
+    <p *ngIf="isoffline">
+      Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell
+    </p>
+  </div>
+</ion-content>

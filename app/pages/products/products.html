@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar brand-bg>
+    <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+    <ion-title>Produkt Liste</ion-title>
+    <ion-buttons end>
+      {{products.length}}
+      <button>
+      <ion-icon name="refresh" *ngIf="isloading"> </ion-icon>
+    </button>
+      <button (click)="onClickOffline()">
+      <ion-icon name="flash" *ngIf="hasError"> </ion-icon>
+    </button> </ion-buttons>
+  </ion-navbar>
+  <form>
+    <ion-searchbar [(ngModel)]="searchfilter" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+  </form>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingtext="Pull to Refresh" refreshingtext="Refreshing ..." refreshingicon="refresher-pulling-icon">
+      < </ion-refresher-content>
+  </ion-refresher>
+  <!--<button (click)="reload()">reload</button>-->
+  <ion-list [virtualScroll]="products">
+    <button ion-item *virtualItem="let item" (click)="itemTapped($event, item)">
+      <ion-icon name="book" item-left></ion-icon>
+      {{item.titel}}
+      <!--<div class="item-note" item-right>
+        {{item.productID}}
+      </div>-->
+    </button>
+  </ion-list>
+</ion-content>
+<button fab brand-bg fab-bottom fab-right (click)="addTapped()">
+    <ion-icon name="add" ></ion-icon>
+  </button>

@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar *navbar brand-bg>
+    <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+    <ion-title>Neues Product</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="getting-started">
+
+  <ion-list>
+    <!--
+ productID : number;
+  _id : String;
+  _rev : String;
+  titel: String;
+  beschreibung: String;
+  fach: String;
+  teilbereich: String;
+  autor: String;
+  verlag: String;
+  isbn: String;-->
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.productID" placeholder="ID"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.titel" placeholder="Titel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.beschreibung" placeholder="Beschreibung"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.fach" placeholder="Fach"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.teilbereich" placeholder="Bereich"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.autor" placeholder="Autor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.verlag" placeholder="Verlag"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="product.isbn" placeholder="ISBN"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+  <p>
+    <button brand-bg (click)="navback()">cancel</button>
+    <button brand-bg (click)="save()">save</button>
+  </p>
+
+</ion-content>
