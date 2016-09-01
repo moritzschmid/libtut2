@@ -3,6 +3,7 @@ import {Loading, NavController, NavParams} from 'ionic-angular';
 import {ProductDetailsPage} from '../product-details/product-details';
 import {HelloIonicPage} from '../hello-ionic/hello-ionic';
 import {AddProductPage} from '../addproduct/addproduct';
+import {SearchProductPage} from '../searchproduct/searchproduct';
 import {ProductData} from '../../providers/product-data/product-data';
 import {ProductDataLocal} from '../../providers/product-data/product-data-local';
 import {Product} from '../../providers/product-data/product';
@@ -61,7 +62,13 @@ export class ProductsPage {
   addTapped() {
     this.nav.push(AddProductPage, {});
   }
- onClickOffline() {
+
+  searchTapped()  {
+ this.nav.push(SearchProductPage, {});
+
+  }
+
+  onClickOffline() {
 
     console.log('onClickOffline()');
 
@@ -81,6 +88,7 @@ export class ProductsPage {
     self.isloading = true;
     this.hasError = false;
     console.log('reload()');
+            refresher.complete();
     self.loadRemoteDB()
       .then(function () {
         self.libdatalocal.store(self.products)
@@ -89,7 +97,6 @@ export class ProductsPage {
             self.isloading = false;
             loading.dismiss();
 
-            refresher.complete();
           });
       })
       .catch(function (err) {

@@ -33,15 +33,17 @@
       <ion-icon name="alert" class="red"></ion-icon>
       Admin
     </div>
-    <p *ngIf="selectedItem.Lends.length > 0">
-      Ausgeliehen:
-      <button ion-item *ngFor="let lend of selectedItem.Lends" (click)="productTabbed($event, lend.product)">
-        <p>{{lend.product ? lend.product.titel: "---"}}</p>         
+  </div>
+  <hr>
+  <div class="lendHeader" *ngIf="selectedItem && selectedItem.Lends">Ausgeliehen:</div>
+  <ion-list *ngIf="selectedItem && selectedItem.Lends" [virtualScroll]="selectedItem.Lends">
+    <button ion-item *virtualItem="let lend" (click)="productTabbed($event, lend.product)">
+        <p>{{lend.product.titel}}</p>         
         <p>Id: {{lend.exemplarId}} Seit: {{lend.lenddate | date: "dd.MM.yyyy"  }} </p>
       </button>
-    </p>
-    <p *ngIf="isoffline">
-      Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell
-    </p>
-  </div>
+  </ion-list>
+
+  <p *ngIf="isoffline">
+    Keine Online Verbindung vorhanden, Daten sind u.U. nicht aktuell
+  </p>
 </ion-content>

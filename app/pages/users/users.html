@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header class="usersHeader">
   <ion-navbar brand-bg>
     <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
     <ion-title>User Liste </ion-title>
     <ion-buttons end>
-      {{users.length}}
+      <span class="itemInfo"> {{users.length}}</span>
       <button>
       <ion-icon name="refresh" *ngIf="isloading"> </ion-icon>
     </button>

@@ -27,7 +27,7 @@ export class ProductDetailData {
 
       self.http.get('http://libtutservice.azurewebsites.net/api/product/' + id)
         //  this.http.get('data/'+id+'.json')
-        .timeout(1000)
+        .timeout(50000)
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data

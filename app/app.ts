@@ -6,6 +6,7 @@ import {ProductsPage} from './pages/products/products';
 import {UsersPage} from './pages/users/users';
 import {AdminPage} from './pages/admin/admin';
 import {Splashscreen} from 'ionic-native';
+import {enableProdMode} from '@angular/core';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -57,4 +58,5 @@ class MyApp {
   }
 }
 
+enableProdMode();
 ionicBootstrap(MyApp);

@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header class="productsHeader">
   <ion-navbar brand-bg>
     <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
     <ion-title>Produkt Liste</ion-title>
     <ion-buttons end>
-      {{products.length}}
+      <span class="itemInfo">{{products.length}}</span>
       <button>
       <ion-icon name="refresh" *ngIf="isloading"> </ion-icon>
     </button>
@@ -36,6 +36,9 @@
     </button>
   </ion-list>
 </ion-content>
-<button fab brand-bg fab-bottom fab-right (click)="addTapped()">
+<button fab brand-bg fab-bottom fab-right (click)="addTapped()" style="bottom:100px">
     <ion-icon name="add" ></ion-icon>
-  </button>
+</button>
+<button fab brand-bg fab-bottom fab-right (click)="searchTapped()">
+    <ion-icon name="search" ></ion-icon>
+</button>

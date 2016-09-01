@@ -1,14 +1,14 @@
-import {Component} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
-import {AppVersion} from "ionic-native";
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {AppVersion} from 'ionic-native';
 
 
 
 
-let PouchDB = require("pouchdb");
+let PouchDB = require('pouchdb');
 
 @Component({
-  templateUrl: "build/pages/admin/admin.html",
+  templateUrl: 'build/pages/admin/admin.html',
 })
 
 
@@ -35,22 +35,24 @@ export class AdminPage {
   getDBInfos() {
 
     this.DbInfos = [];
-    this.getDBInfo("libtutDB").then(data => { this.DbInfos.push(data); });
-    this.getDBInfo("libtutDB_details").then(data => { this.DbInfos.push(data); });
+    this.getDBInfo('libtutDB').then(data => { this.DbInfos.push(data); });
+    this.getDBInfo('libtutDB_details').then(data => { this.DbInfos.push(data); });
+    this.getDBInfo('libtutDB_userdetails').then(data => { this.DbInfos.push(data); });
+    
     // this.getDBInfo('libtutDB_users').then(data => { this.DbInfos.push(data); })
   }
   getDBInfo(dbname: string) {
-    let pouchDb = new PouchDB(dbname, { adapter: "websql" });
+    let pouchDb = new PouchDB(dbname, { adapter: 'websql' });
     return pouchDb.info();
 
 
   }
   deleteListDB(dbname: string) {
     let self = this;
-    let pouchDb = new PouchDB(dbname, { adapter: "websql" });
-    console.log("PouchDB: " + pouchDb.adapter);
+    let pouchDb = new PouchDB(dbname, { adapter: 'websql' });
+    console.log('PouchDB: ' + pouchDb.adapter);
     pouchDb.destroy()
-      .then(console.log(dbname + " deleted"))
+      .then(console.log(dbname + ' deleted'))
       .then(
       // self.getDBInfos()
       );

@@ -36,7 +36,8 @@ export class UserDetailsPage {
     let remoteItem: any = null;
     let self = this;
 
-    self.detailDataLocal.load(id)
+    return self.detailDataLocal
+      .load(id)
       .catch(err => {
         if (err.name === 'not_found') {
           // init something to show
@@ -54,32 +55,47 @@ export class UserDetailsPage {
         self.selectedItem = data;
         return data;
       })
-      .then(function (localItem: any) {
+      .then(localItem => {
         // load remote data
-        self.detailDataRemote.load(id)
+        console.log('start loading remote data');
+        
+        return self.detailDataRemote
+          .load(id)
           .then(data => {
             self.isoffline = false;
-            console.log('item loaded from remote storage');
-            console.log(data);
-
             self.selectedItem = data;
             self.selectedItem._id = localItem._id;
             self.selectedItem._rev = localItem._rev;
-            self.detailDataLocal.upsert(self.selectedItem);
+            console.log('item loaded from remote storage');
+            return self.selectedItem;
+          })
+          .then(data => {
+            console.log('start saving remote data to local Db');
+            
+            self.detailDataLocal
+              .upsert(self.selectedItem)
+              .then(function () {
+                  console.log('saving done'); });
+                  return self.selectedItem;            
+            });
           })
           .catch(err => {
             // we're offline
             if (err.name !== 'timeout') {
               console.log('timeout');
               self.isoffline = true;
+              return self.selectedItem;
             } else
               throw err;
           });
       }
-      );
+    
+      
 
-  }
-productTabbed(event, product) {
+  
+ 
+ 
+  productTabbed(event, product) {
     this.nav.push(ProductDetailsPage, {
       item: product
     });

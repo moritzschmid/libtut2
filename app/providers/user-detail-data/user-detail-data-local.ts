@@ -34,22 +34,26 @@ export class UserDetailDataLocal {
   upsert(detail: any) {
     if (detail._id) {
       // update
-      this.pouchDbDetails.put(detail)
+      return this.pouchDbDetails.put(detail)
         .then(info => {
           console.log('item updated in local storage');
+          return info;
         })
         .catch(err => {
           console.log('error on updating item: ' + err);
+          throw err;
         });
     } else {
       // add : use productID as pouchDb ID
       detail._id = detail.userId.toString();
-      this.pouchDbDetails.put(detail)
+      return this.pouchDbDetails.put(detail)
         .then(info => {
           console.log('item added to local storage');
+          return info;
         })
         .catch(err => {
           console.log('error on adding item: ' + err);
+          throw err;
         });
     }
   }

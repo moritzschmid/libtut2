@@ -44,7 +44,7 @@ export class ProductDetailsPage {
           self.selectedItem = self.navItem;
           self.selectedItem._id = null;
           self.selectedItem._rev = null;
-          return self.selectedItem ;
+          return self.selectedItem;
         }
         throw err;
       })
@@ -61,7 +61,7 @@ export class ProductDetailsPage {
             console.log('item loaded from remote storage');
             console.log(data);
 
-            self.selectedItem = data[0];
+            self.selectedItem = data;
             self.selectedItem._id = localItem._id;
             self.selectedItem._rev = localItem._rev;
             self.detailDataLocal.upsert(self.selectedItem);
@@ -78,8 +78,8 @@ export class ProductDetailsPage {
       );
   }
   userTapped(event, user) {
-    this.nav.push(UserDetailsPage, {
-      item: user
-    });
-  }
+    this.nav.insert(this.nav.length() - 1, UserDetailsPage,
+      { item: user }
+    );
+  };
 }
