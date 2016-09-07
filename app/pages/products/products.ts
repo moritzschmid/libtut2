@@ -64,7 +64,7 @@ export class ProductsPage {
   }
 
   searchTapped()  {
- this.nav.push(SearchProductPage, {});
+ this.nav.push(SearchProductPage, {delegate: this});
 
   }
 

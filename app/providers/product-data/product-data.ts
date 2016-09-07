@@ -50,8 +50,8 @@ export class ProductData {
     });
   }
 
-  search(product: string)  {
-    
+  search(product: Product) {
+
     let self = this;
     // don't have the data yet
     return new Promise(function (resolve, reject) {
@@ -59,13 +59,14 @@ export class ProductData {
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
       console.log('searching products');
-console.log(product);
+      console.log(product);
 
-var headers = new Headers();
-  headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      var req = {'filter': product};
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
       self.http
-        .post('http://libtutservice.azurewebsites.net/api/product', req, {headers})
+        .post('http://192.168.178.20:8100/api/product', product, { headers })
+        // .post('http://libtutservice.azurewebsites.net/api/product', product, { headers })
         .timeout(5000)
         .map(res => res.json())
         .subscribe(data => {

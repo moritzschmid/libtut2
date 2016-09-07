@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Product} from '../../providers/product-data/product';
 import {ProductData} from '../../providers/product-data/product-data';
-
+import {ProductsPage} from '../products/products';
 
 @Component({
   templateUrl: 'build/pages/searchproduct/searchproduct.html',
@@ -10,6 +10,7 @@ import {ProductData} from '../../providers/product-data/product-data';
 })
 export class SearchProductPage {
   product: Product;
+  parentPage: ProductsPage;
   constructor(private nav: NavController, navParams: NavParams, public libdataRemote: ProductData) {
     this.product = new Product();
     this.product.titel = '';
@@ -21,8 +22,8 @@ export class SearchProductPage {
     this.product.productID = 0;
     this.product.teilbereich = '';
     this.product.verlag = '';
-    
-   
+    this.parentPage = navParams.get('delegate');
+
   }
 
   navback() {
@@ -32,9 +33,11 @@ export class SearchProductPage {
   search() {
     console.log(JSON.stringify(this.product));
     var self = this;
-    self.libdataRemote.search(JSON.stringify(this.product)).then(data => {
-      console.log(data);
-      
-    });
+    self.libdataRemote.search(this.product).then(data => {
+      self.parentPage.products = data as Array<Product>;
+    }).then(
+      function () {
+        self.navback();
+      });
   }
 }
