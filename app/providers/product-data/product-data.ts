@@ -65,8 +65,8 @@ export class ProductData {
       headers.append('Content-Type', 'application/json');
 
       self.http
-        .post('http://192.168.178.20:8100/api/product', product, { headers })
-        // .post('http://libtutservice.azurewebsites.net/api/product', product, { headers })
+        // .post('http://192.168.178.20:8100/api/product', product, { headers })
+        .post('http://libtutservice.azurewebsites.net/api/product', product, { headers })
         .timeout(5000)
         .map(res => res.json())
         .subscribe(data => {

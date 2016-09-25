@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+
+import {ControlGroup, Control } from '@angular/common';
 import {NavController, NavParams} from 'ionic-angular';
 import {Product} from '../../providers/product-data/product';
 import {ProductData} from '../../providers/product-data/product-data';
@@ -9,35 +11,48 @@ import {ProductsPage} from '../products/products';
   providers: [ProductData]
 })
 export class SearchProductPage {
-  product: Product;
   parentPage: ProductsPage;
+  form: ControlGroup;
   constructor(private nav: NavController, navParams: NavParams, public libdataRemote: ProductData) {
-    this.product = new Product();
-    this.product.titel = '';
-    this.product.beschreibung = '';
-    this.product.autor = '';
-    this.product.beschreibung = '';
-    this.product.fach = '';
-    this.product.isbn = '';
-    this.product.productID = 0;
-    this.product.teilbereich = '';
-    this.product.verlag = '';
+    
     this.parentPage = navParams.get('delegate');
-
+    this.form = new ControlGroup({
+      product: new ControlGroup({
+        productID: new Control(),
+        titel: new Control(),
+        beschreibung: new Control(),
+        autor: new Control(),
+        fach: new Control(),
+        isbn: new Control(),
+        teilbereich: new Control(),
+        verlag: new Control(),
+      })
+    });
   }
-
   navback() {
     this.nav.pop();
   }
 
   search() {
-    console.log(JSON.stringify(this.product));
+
+    let product: Product;
+    product = this.form.value.product as Product;
+    console.log(product);
+
     var self = this;
-    self.libdataRemote.search(this.product).then(data => {
-      self.parentPage.products = data as Array<Product>;
+    // self.parentPage.isloading = true;
+    self.libdataRemote.search(product).then(data => {
+      if (data) {
+        self.parentPage.products = data as Array<Product>;
+        self.parentPage.showReload  = true;
+      } else {
+        alert('FUCK OFF');
+      }
     }).then(
       function () {
+        self.parentPage.isloading = false;
         self.navback();
       });
+    return true;
   }
 }

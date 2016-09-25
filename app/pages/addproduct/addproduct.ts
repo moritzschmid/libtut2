@@ -1,10 +1,10 @@
-import {Component} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
-import {Product} from "../../providers/product-data/product";
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {Product} from '../../providers/product-data/product';
 
 
 @Component({
-  templateUrl: "build/pages/addproduct/addproduct.html"
+  templateUrl: 'build/pages/addproduct/addproduct.html'
 })
 export class AddProductPage {
   product: Product;

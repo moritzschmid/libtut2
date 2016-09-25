@@ -22,10 +22,10 @@
       {{selectedItem.firstname}} {{selectedItem.name}}
     </div>-->
     <div class="desc" *ngIf="selectedItem.userId">
-      {{selectedItem.userId}}
+      ID: {{selectedItem.userId}}
     </div>
-    <hr>
     <div class="author" *ngIf="selectedItem.email">
+    <hr>
       <ion-icon name="mail"></ion-icon>
       <a href="mailto:{{selectedItem.email}}">{{selectedItem.email}}</a>
     </div>
@@ -35,10 +35,10 @@
     </div>
   </div>
   <hr>
-  <div class="lendHeader" *ngIf="selectedItem && selectedItem.Lends">Ausgeliehen:</div>
+  <div class="lendHeader" *ngIf="selectedItem && selectedItem.Lends && selectedItem.Lends.length > 0">Ausgeliehen:</div>
   <ion-list *ngIf="selectedItem && selectedItem.Lends" [virtualScroll]="selectedItem.Lends">
     <button ion-item *virtualItem="let lend" (click)="productTabbed($event, lend.product)">
-        <p>{{lend.product.titel}}</p>         
+        <p *ngIf="lend.product">{{lend.product.titel}}</p>         
         <p>Id: {{lend.exemplarId}} Seit: {{lend.lenddate | date: "dd.MM.yyyy"  }} </p>
       </button>
   </ion-list>

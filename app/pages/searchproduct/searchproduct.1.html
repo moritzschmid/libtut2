@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar brand-bg>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Erweiterte Suche</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="getting-started">
+  <form #form="ngForm" (ngSubmit)="search()"> 
+    <ion-list>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.productID" placeholder="ID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.titel" placeholder="Titel"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.beschreibung" placeholder="Beschreibung"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.fach" placeholder="Fach"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.teilbereich" placeholder="Bereich"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.autor" placeholder="Autor"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.verlag" placeholder="Verlag"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="product.isbn" placeholder="ISBN"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button type="submit" style="display:none"></button>
+  </form>
+    <p>
+      <button brand-bg (click)="navback()">cancel</button>
+      <button brand-bg (click)="search()">search</button>
+    </p>
+</ion-content>

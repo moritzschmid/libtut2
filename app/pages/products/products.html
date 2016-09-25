@@ -13,26 +13,24 @@
       <ion-icon name="flash" *ngIf="hasError"> </ion-icon>
     </button> </ion-buttons>
   </ion-navbar>
-  <form>
+  <div>
+  <!--<form [hidden]="isFiltered">-->
+    <form>
     <ion-searchbar [(ngModel)]="searchfilter" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
     </ion-searchbar>
   </form>
+  </div>
 </ion-header>
 
 <ion-content>
-
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingtext="Pull to Refresh" refreshingtext="Refreshing ..." refreshingicon="refresher-pulling-icon">
       < </ion-refresher-content>
-  </ion-refresher>
-  <!--<button (click)="reload()">reload</button>-->
+  </ion-refresher>  
   <ion-list [virtualScroll]="products">
     <button ion-item *virtualItem="let item" (click)="itemTapped($event, item)">
       <ion-icon name="book" item-left></ion-icon>
-      {{item.titel}}
-      <!--<div class="item-note" item-right>
-        {{item.productID}}
-      </div>-->
+      {{item.titel}}     
     </button>
   </ion-list>
 </ion-content>
@@ -41,4 +39,7 @@
 </button>
 <button fab brand-bg fab-bottom fab-right (click)="searchTapped()">
     <ion-icon name="search" ></ion-icon>
+</button>
+<button fab brand-bg fab-bottom fab-right *ngIf="showReload" (click)="showReload=false;loadLocalDB();" style="bottom:185px">
+    <ion-icon name="refresh" ></ion-icon>
 </button>

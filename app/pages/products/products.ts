@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Loading, NavController, NavParams} from 'ionic-angular';
+import {Loading, NavController, NavParams } from 'ionic-angular';
 import {ProductDetailsPage} from '../product-details/product-details';
 import {HelloIonicPage} from '../hello-ionic/hello-ionic';
 import {AddProductPage} from '../addproduct/addproduct';
@@ -23,6 +23,7 @@ export class ProductsPage {
   isloading: boolean;
   hasError: boolean;
   searchfilter: string;
+  showReload: boolean;
 
   constructor(private nav: NavController, navParams: NavParams, public libdataRemote: ProductData, public libdatalocal: ProductDataLocal) {
     // If we navigated to this page, we will have an item available as a nav param
@@ -30,7 +31,7 @@ export class ProductsPage {
     this.products = new Array<Product>();
     this.isloading = true;
     this.hasError = false;
-
+    this.showReload = false;
     this.loadLocalDB();
     Keyboard.hideKeyboardAccessoryBar(true);
     console.log('constructor done ');
@@ -63,8 +64,10 @@ export class ProductsPage {
     this.nav.push(AddProductPage, {});
   }
 
-  searchTapped()  {
- this.nav.push(SearchProductPage, {delegate: this});
+  searchTapped() {
+    this.nav.push(SearchProductPage, {
+        delegate: this
+       });
 
   }
 
@@ -88,7 +91,7 @@ export class ProductsPage {
     self.isloading = true;
     this.hasError = false;
     console.log('reload()');
-            refresher.complete();
+    refresher.complete();
     self.loadRemoteDB()
       .then(function () {
         self.libdatalocal.store(self.products)
@@ -120,17 +123,22 @@ export class ProductsPage {
 
   onInput(search) {
     console.log('onInput');
+    this.loadfiltered();
+  }
 
+  loadfiltered() {
     let self = this;
+
     self.loadLocalDB()
       .then(function () {
-        if (self.searchfilter != null && self.searchfilter.length > 0) {
 
           let result = self.products.filter(function (product) {
-            return product.titel.toLowerCase().indexOf(self.searchfilter.toLowerCase()) >= 0;
+            return product.titel.search(new RegExp(self.searchfilter, 'i')) >= 0;
+           
           });
+          self.products.splice(0, self.products.length);
           self.products = result;
-        }
+        
       });
   }
 
