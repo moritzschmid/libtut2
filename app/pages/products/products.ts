@@ -40,6 +40,8 @@ export class ProductsPage {
 
   loadLocalDB() {
     let self = this;
+    this.showReload = false;
+
     return self.libdatalocal.load()
       .then(data => { self.products = data; })
       .then(function () {
@@ -72,9 +74,7 @@ export class ProductsPage {
   }
 
   onClickOffline() {
-
     console.log('onClickOffline()');
-
     Dialogs.alert('Es besteht keine verbindung zur Bibliothek', 'Offline', 'ok');
   }
 
@@ -121,39 +121,24 @@ export class ProductsPage {
       });
   }
 
-  onInput(search) {
-    console.log('onInput');
-    this.loadfiltered();
-  }
-
   loadfiltered() {
     let self = this;
-
     self.loadLocalDB()
       .then(function () {
-
           let result = self.products.filter(function (product) {
-            return product.titel.search(new RegExp(self.searchfilter, 'i')) >= 0;
-           
+            return product.titel.search(new RegExp(self.searchfilter, 'i')) >= 0;   
           });
           self.products.splice(0, self.products.length);
           self.products = result;
-        
       });
   }
 
   onCancel(event) {
     console.log('onCancel');
     // seems to be softkeyboardbutton
-
     if (event.x + event.y === 0 && event.type === 'click')
       return;
     Keyboard.close();
   }
 
-  closeKb() {
-    console.log('closeKb()');
-    Keyboard.close();
-    return false;
-  }
 }

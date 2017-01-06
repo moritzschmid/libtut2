@@ -22,3 +22,12 @@ ion-list > .item:first-child,
 .has-refresher > scroll-content {
     border-top: 0px none;
 }
+@media (light-level: normal) {
+  ion-title { background: url("texture.jpg"); color: #333 }
+}
+@media (light-level: dim) {
+  ion-title { background: #222; color: #ccc }
+}
+@media (light-level: washed) {
+  ion-title { background: white; color: black; font-size: 2em; }
+}

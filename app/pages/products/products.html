@@ -16,7 +16,7 @@
   <div>
   <!--<form [hidden]="isFiltered">-->
     <form>
-    <ion-searchbar [(ngModel)]="searchfilter" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+    <ion-searchbar [(ngModel)]="searchfilter" [showCancelButton]="true" (ionInput)="loadfiltered()" (ionCancel)="onCancel($event)">
     </ion-searchbar>
   </form>
   </div>

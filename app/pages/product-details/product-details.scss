@@ -11,9 +11,11 @@
   {
     font-size: 1.2em;
   }
-  .description 
+  .description ion-label
   {
     font-size: 0.9em;
+    white-space: normal;
+    overflow: visible;
   }
   .red{
     color:red;
